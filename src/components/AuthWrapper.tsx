@@ -99,7 +99,7 @@ export const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
           {/* Footer */}
           <div className="text-center mt-8">
             <p className="text-sm text-gray-500">
-              Powered by Microsoft Azure Active Directory
+              Built by Cameron Horwood © 2025
             </p>
           </div>
         </div>
