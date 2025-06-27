@@ -66,29 +66,17 @@ const NavBar = ({
       url: "#",
       items: [
         {
-          title: "Blog",
-          description: "The latest industry news, updates, and info",
-          icon: <Book className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
           title: "Company",
-          description: "Our mission is to innovate and empower the world",
+          description: "Stimulate the creation and growth of tech companies in our province",
           icon: <Trees className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Careers",
-          description: "Browse job listing and discover our workspace",
-          icon: <Sunset className="size-5 shrink-0" />,
-          url: "#",
+          url: "https://nbif.ca/",
         },
         {
           title: "Support",
           description:
-            "Get in touch with our support team or visit our community forums",
+            "Get in touch with our Systems and Data Analyst",
           icon: <Zap className="size-5 shrink-0" />,
-          url: "#",
+          url: "https://app.slack.com/client/T6LGFA6MC/team/D06CF57GXP1",
         },
       ],
     },
@@ -165,9 +153,12 @@ const renderMenuItem = (item: MenuItem) => {
     return (
       <NavigationMenuItem key={item.title}>
         <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
-        <NavigationMenuContent className="bg-popover text-popover-foreground">
+        <NavigationMenuContent 
+          className="bg-popover text-popover-foreground !w-[500px] !min-w-[500px]"
+          style={{ width: '300px', minWidth: '300px' }}
+        >
           {item.items.map((subItem) => (
-            <NavigationMenuLink asChild key={subItem.title} className="w-80">
+            <NavigationMenuLink asChild key={subItem.title} className="block">
               <SubMenuLink item={subItem} />
             </NavigationMenuLink>
           ))}
