@@ -1,4 +1,4 @@
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import { Menu, Trees, Zap } from "lucide-react";
 import { LogoutButton } from "./LogoutButton";
 
 import {
