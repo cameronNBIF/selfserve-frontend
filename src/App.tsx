@@ -6,7 +6,6 @@ import { AuthWrapper } from "./components/AuthWrapper";
 import Page from './components/DataTable/Page.tsx'
 import Homepage from './components/Homepage.tsx'
 import { NavBar } from './components/NavBar.tsx'
-import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const msalInstance = new PublicClientApplication(msalConfig);
