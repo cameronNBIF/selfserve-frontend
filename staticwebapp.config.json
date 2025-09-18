@@ -1,0 +1,13 @@
+{
+  "mimeTypes": {
+    ".js": "application/javascript",
+    ".mjs": "application/javascript",
+    ".json": "application/json",
+    ".wasm": "application/wasm",
+    ".ts": "application/javascript"
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/assets/*.{png,jpg,gif,svg}", "/static/*"]
+  }
+}
