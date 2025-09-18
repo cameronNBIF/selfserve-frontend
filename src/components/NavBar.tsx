@@ -1,20 +1,11 @@
 import { Menu } from "lucide-react";
 import { LogoutButton } from "./LogoutButton";
+import { NavLink } from "react-router-dom";
 
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
@@ -23,87 +14,67 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface MenuItem {
   title: string;
-  url: string;
-  description?: string;
-  icon?: React.ReactNode;
-  items?: MenuItem[];
+  path: string;
 }
 
-interface NavBarProps {
-  logo?: {
-    url: string;
-    src: string;
-    alt: string;
-    title: string;
-  };
-  menu?: MenuItem[];
-  auth?: {
-    login: {
-      title: string;
-      url: string;
-    };
-    signup: {
-      title: string;
-      url: string;
-    };
-  };
-}
+const menu: MenuItem[] = [
+  { title: "Home", path: "/" },
+  { title: "Search", path: "/search" },
+];
 
 const NavBar = ({
   logo = {
-    url: "/",
     src: "/NBIF_Logo.svg",
     alt: "NBIF Logo",
     title: "NBIF",
   },
-  menu = [
-    { title: "Home", url: "#" },
-    //Removing this section of the NavBar until its needed
-
-    // {
-    //   title: "Products",
-    //   url: "#",
-    //   items: [
-    //     {
-    //       title: "Company",
-    //       description: "Stimulate the creation and growth of tech companies in our province",
-    //       icon: <Trees className="size-5 shrink-0" />,
-    //       url: "https://nbif.ca/",
-    //     },
-    //     {
-    //       title: "Support",
-    //       description:
-    //         "Get in touch with our Systems and Data Analyst",
-    //       icon: <Zap className="size-5 shrink-0" />,
-    //       url: "https://app.slack.com/client/T6LGFA6MC/team/D06CF57GXP1",
-    //     },
-    //   ],
-    // },
-  ],
-}: NavBarProps) => {
+}) => {
   return (
-    <section className="py-4">
+    <section className="py-4 border-b bg-white/80 backdrop-blur-sm">
       <div className="container">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
             {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
+            <NavLink
+              to="/"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            >
               <img src={logo.src} className="max-h-8" alt={logo.alt} />
-            </a>
+            </NavLink>
+
             <div className="flex items-center">
               <NavigationMenu>
                 <NavigationMenuList>
-                  {menu.map((item) => renderMenuItem(item))}
+                  {menu.map((item) => (
+                    <NavigationMenuItem key={item.path}>
+                      <NavLink
+                        to={item.path}
+                        className={({ isActive }) =>
+                          cn(
+                            "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50",
+                            isActive
+                              ? "bg-accent text-accent-foreground"
+                              : "bg-background"
+                          )
+                        }
+                      >
+                        {item.title}
+                      </NavLink>
+                    </NavigationMenuItem>
+                  ))}
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
           </div>
+
           <div className="flex gap-2">
-            <LogoutButton/>
+            <LogoutButton />
           </div>
         </nav>
 
@@ -111,34 +82,54 @@ const NavBar = ({
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
+            <NavLink
+              to="/"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            >
               <img src={logo.src} className="max-h-8" alt={logo.alt} />
-            </a>
+            </NavLink>
+
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
                   <Menu className="size-4" />
                 </Button>
               </SheetTrigger>
+
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
                   <SheetTitle>
-                    <a href={logo.url} className="flex items-center gap-2">
+                    <NavLink
+                      to="/"
+                      className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                    >
                       <img src={logo.src} className="max-h-8" alt={logo.alt} />
-                    </a>
+                    </NavLink>
                   </SheetTitle>
                 </SheetHeader>
-                <div className="flex flex-col gap-6 p-4">
-                  <Accordion
-                    type="single"
-                    collapsible
-                    className="flex w-full flex-col gap-4"
-                  >
-                    {menu.map((item) => renderMobileMenuItem(item))}
-                  </Accordion>
 
-                  <div className="flex flex-col gap-3">
-                    <LogoutButton/>
+                <div className="flex flex-col gap-6 p-4">
+                  <div className="flex flex-col gap-4">
+                    {menu.map((item) => (
+                      <NavLink
+                        key={item.path}
+                        to={item.path}
+                        className={({ isActive }) =>
+                          cn(
+                            "text-md font-semibold text-left px-4 py-2 rounded-md transition-colors",
+                            isActive
+                              ? "bg-accent text-accent-foreground"
+                              : "hover:bg-accent hover:text-accent-foreground"
+                          )
+                        }
+                      >
+                        {item.title}
+                      </NavLink>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-col gap-3 mt-8">
+                    <LogoutButton />
                   </div>
                 </div>
               </SheetContent>
@@ -147,79 +138,6 @@ const NavBar = ({
         </div>
       </div>
     </section>
-  );
-};
-
-const renderMenuItem = (item: MenuItem) => {
-  if (item.items) {
-    return (
-      <NavigationMenuItem key={item.title}>
-        <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
-        <NavigationMenuContent 
-          className="bg-popover text-popover-foreground !w-[500px] !min-w-[500px]"
-          style={{ width: '300px', minWidth: '300px' }}
-        >
-          {item.items.map((subItem) => (
-            <NavigationMenuLink asChild key={subItem.title} className="block">
-              <SubMenuLink item={subItem} />
-            </NavigationMenuLink>
-          ))}
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    );
-  }
-
-  return (
-    <NavigationMenuItem key={item.title}>
-      <NavigationMenuLink
-        href={item.url}
-        className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
-      >
-        {item.title}
-      </NavigationMenuLink>
-    </NavigationMenuItem>
-  );
-};
-
-const renderMobileMenuItem = (item: MenuItem) => {
-  if (item.items) {
-    return (
-      <AccordionItem key={item.title} value={item.title} className="border-b-0">
-        <AccordionTrigger className="text-md py-0 font-semibold hover:no-underline">
-          {item.title}
-        </AccordionTrigger>
-        <AccordionContent className="mt-2">
-          {item.items.map((subItem) => (
-            <SubMenuLink key={subItem.title} item={subItem} />
-          ))}
-        </AccordionContent>
-      </AccordionItem>
-    );
-  }
-
-  return (
-    <a key={item.title} href={item.url} className="text-md font-semibold">
-      {item.title}
-    </a>
-  );
-};
-
-const SubMenuLink = ({ item }: { item: MenuItem }) => {
-  return (
-    <a
-      className="flex flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground"
-      href={item.url}
-    >
-      <div className="text-foreground">{item.icon}</div>
-      <div>
-        <div className="text-sm font-semibold">{item.title}</div>
-        {item.description && (
-          <p className="text-sm leading-snug text-muted-foreground">
-            {item.description}
-          </p>
-        )}
-      </div>
-    </a>
   );
 };
 
