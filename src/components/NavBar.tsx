@@ -1,4 +1,4 @@
-import { Menu, Trees, Zap } from "lucide-react";
+import { Menu } from "lucide-react";
 import { LogoutButton } from "./LogoutButton";
 
 import {
@@ -61,25 +61,27 @@ const NavBar = ({
   },
   menu = [
     { title: "Home", url: "#" },
-    {
-      title: "Products",
-      url: "#",
-      items: [
-        {
-          title: "Company",
-          description: "Stimulate the creation and growth of tech companies in our province",
-          icon: <Trees className="size-5 shrink-0" />,
-          url: "https://nbif.ca/",
-        },
-        {
-          title: "Support",
-          description:
-            "Get in touch with our Systems and Data Analyst",
-          icon: <Zap className="size-5 shrink-0" />,
-          url: "https://app.slack.com/client/T6LGFA6MC/team/D06CF57GXP1",
-        },
-      ],
-    },
+    //Removing this section of the NavBar until its needed
+
+    // {
+    //   title: "Products",
+    //   url: "#",
+    //   items: [
+    //     {
+    //       title: "Company",
+    //       description: "Stimulate the creation and growth of tech companies in our province",
+    //       icon: <Trees className="size-5 shrink-0" />,
+    //       url: "https://nbif.ca/",
+    //     },
+    //     {
+    //       title: "Support",
+    //       description:
+    //         "Get in touch with our Systems and Data Analyst",
+    //       icon: <Zap className="size-5 shrink-0" />,
+    //       url: "https://app.slack.com/client/T6LGFA6MC/team/D06CF57GXP1",
+    //     },
+    //   ],
+    // },
   ],
 }: NavBarProps) => {
   return (
