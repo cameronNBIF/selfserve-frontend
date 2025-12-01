@@ -56,7 +56,7 @@ export default function Page() {
       // Get user's access token
       const accessToken = await getAccessToken()
       
-      const response = await axios.get("https://selfserve-gvgrasb7evd3gygv.canadacentral-01.azurewebsites.net/query", {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/query`, {
         params: { company: searchTerm.trim() },
         headers: {
           'Authorization': `Bearer ${accessToken}`
